@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import profileImage from "./Images/portfolio_image.jpg"; // Update to your profile photo path
+import profileImage from "../Images/portfolio image.jpg";
 
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);
@@ -21,33 +21,23 @@ function Profile() {
   );
   const [github, setGithub] = useState("https://github.com/hemantT1999");
 
-  const handleEditProfile = () => {
-    setIsEditing(true);
-  };
-
-  const handleSaveProfile = () => {
-    setIsEditing(false);
-  };
-
-  const handleCancel = () => {
-    setIsEditing(false);
-  };
+  const handleEditProfile = () => setIsEditing(true);
+  const handleSaveProfile = () => setIsEditing(false);
+  const handleCancel = () => setIsEditing(false);
 
   return (
     <div className="bg-gray-100 p-6 rounded-lg shadow-md max-w-3xl mx-auto mt-10 hover:shadow-lg transition-shadow duration-300">
       <div className="space-y-4">
         <img
-          src={profileImage} // Using the imported profile image
+          src={profileImage}
           alt="Profile"
           className="w-32 h-32 rounded-full mx-auto"
         />
         <div className="animate-pulse text-3xl font-bold text-gray-700 transition-opacity duration-500 ease-in-out hover:text-blue-500">
           {name}
         </div>
-        <p className="text-lg text-gray-700">
-          Passionate full stack developer with a focus on creating seamless and
-          efficient web applications.
-        </p>
+        <p className="text-lg text-gray-700">{title}</p>
+        <p className="text-md text-gray-600">{location}</p>
         <div className="space-y-1">
           <h3 className="text-xl font-semibold text-gray-800 hover:text-blue-500 transition duration-300">
             Skills
@@ -93,73 +83,21 @@ function Profile() {
       {isEditing && (
         <div className="mt-6 p-4 bg-white rounded-lg shadow-md">
           <h3 className="text-xl font-semibold mb-4">Edit Profile</h3>
-          <label className="block mb-2">
-            Name:
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="border rounded w-full p-2"
-            />
-          </label>
-          <label className="block mb-2">
-            Title:
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="border rounded w-full p-2"
-            />
-          </label>
-          <label className="block mb-2">
-            Location:
-            <input
-              type="text"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              className="border rounded w-full p-2"
-            />
-          </label>
-          <label className="block mb-2">
-            Skills (comma separated):
-            <input
-              type="text"
-              value={skills.join(", ")}
-              onChange={(e) =>
-                setSkills(
-                  e.target.value.split(",").map((skill) => skill.trim())
-                )
+          <div className="space-y-2">
+            {renderInput("Name:", name, setName)}
+            {renderInput("Title:", title, setTitle)}
+            {renderInput("Location:", location, setLocation)}
+            {renderInput(
+              "Skills (comma separated):",
+              skills.join(", "),
+              (value) => {
+                setSkills(value.split(",").map((skill) => skill.trim()));
               }
-              className="border rounded w-full p-2"
-            />
-          </label>
-          <label className="block mb-2">
-            Email:
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="border rounded w-full p-2"
-            />
-          </label>
-          <label className="block mb-2">
-            LinkedIn:
-            <input
-              type="url"
-              value={linkedin}
-              onChange={(e) => setLinkedin(e.target.value)}
-              className="border rounded w-full p-2"
-            />
-          </label>
-          <label className="block mb-2">
-            GitHub:
-            <input
-              type="url"
-              value={github}
-              onChange={(e) => setGithub(e.target.value)}
-              className="border rounded w-full p-2"
-            />
-          </label>
+            )}
+            {renderInput("Email:", email, setEmail, "email")}
+            {renderInput("LinkedIn:", linkedin, setLinkedin, "url")}
+            {renderInput("GitHub:", github, setGithub, "url")}
+          </div>
           <div className="flex space-x-4 mt-4">
             <button
               onClick={handleSaveProfile}
@@ -178,6 +116,21 @@ function Profile() {
       )}
     </div>
   );
+
+  function renderInput(label, value, onChange, type = "text") {
+    return (
+      <label className="block mb-2">
+        {label}
+        <input
+          type={type}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="border rounded w-full p-2"
+          placeholder={`Enter your ${label.toLowerCase()}`}
+        />
+      </label>
+    );
+  }
 }
 
 export default Profile;
