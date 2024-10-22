@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import profileImage from "../Images/portfolio image.jpg";
+import profileImage from "../Images/portfolio_image.jpg";
 
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);
