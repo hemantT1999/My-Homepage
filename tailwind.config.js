@@ -1,8 +1,10 @@
-// tailwind.config.js
 module.exports = {
-  darkMode: "media", // or remove this line entirely
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+  darkMode: "media",
   theme: {
+    extend: {},
+  },
+  variants: {
     extend: {},
   },
   plugins: [],
