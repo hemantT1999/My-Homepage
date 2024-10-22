@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import profileImage from "./Images/portfolio_image.jpg"; // Update to your profile photo path
 
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);
@@ -36,7 +37,7 @@ function Profile() {
     <div className="bg-gray-100 p-6 rounded-lg shadow-md max-w-3xl mx-auto mt-10 hover:shadow-lg transition-shadow duration-300">
       <div className="space-y-4">
         <img
-          src={require("D:\\my-homepage\\src\\Images\\portfolio image.jpg")} // Update to your profile photo path
+          src={profileImage} // Using the imported profile image
           alt="Profile"
           className="w-32 h-32 rounded-full mx-auto"
         />
